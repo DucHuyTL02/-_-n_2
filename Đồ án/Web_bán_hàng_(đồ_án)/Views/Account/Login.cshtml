@@ -1,0 +1,48 @@
+﻿@model Web_bán_hàng__đồ_án_.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<link href="~/Content/mystyle/StyleLogin.css" rel="stylesheet" />
+<!DOCTYPE HTML>
+<head lang="vi">
+    <meta name="description" content="Tài Khoản Đăng Nhập" />
+    <meta charset="utf-8" />
+    <title>Đăng nhập/Đăng kí</title>
+</head>
+<body>
+    <div id="TrangLogin">
+        <div id="Login">
+            <h1>Đăng nhập</h1>
+            <div>
+                <form id="form">
+                    <div class="Trangchinh">
+                        <i class="fas fa-user"></i>
+                        <label for="name" class="description">Tên đăng nhập</label><br />
+                        <input type="text" name="Nhập tên đăng nhập" placeholder="Nhập tên tài khoản" class="input-box" /><br />
+                    </div>
+                    <div class="Trangchinh">
+                        <i class="fas fa-lock"></i>
+                        <label for="password" class="description">Password</label><br />
+                        <input type="password" name="Mật khẩu" placeholder="Nhập mật khẩu" class="input-box" /><br />
+                    </div>
+                    <div id="remember">
+                        <label><input type="checkbox" />Nhớ mật khẩu</label>
+                        <a href="#">Quên mật khẩu?</a>
+                    </div>
+                    <button type="submit" class="btn-login1">Đăng nhập</button>
+                    <div class="input">
+                        <label for="register">Bạn chưa có tài khoản?</label>
+                        <a style="color:red" ; href="~/Giohang/register">Đăng kí</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+

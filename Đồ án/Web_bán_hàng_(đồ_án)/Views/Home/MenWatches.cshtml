@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Web_bán_hàng__đồ_án_.Models.Product> 
+@{
+    ViewBag.Title = "Đồng Hồ Nam ";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Đồng Hồ Nam</title>
+    <style>
+        h1{
+            text-align:center;
+        }
+        .product-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .product:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .product img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #e74c3c;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .product .product-name, .product .product-price {
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product .product-price {
+            background-color: #fff;
+            font-size: 18px;
+            color: #2ecc71;
+            font-weight: bold;
+            padding: 15px 10px;
+        }
+
+        .product .product-name:hover {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Danh Sách Đồng Hồ Nam</h1>
+
+        
+
+        <!-- Khối ngang thứ hai -->
+        <div class="product-row">
+            <div class="product">
+                @foreach (var pro in Model)
+                {
+                   
+                        <div class="product">
+                            <a href="@Html.ActionLink("Xem chi tiết", "Details", "Product", new { id = pro.ProductID }, null)">
+                                <div>
+                                    <img src="@Url.Content(pro.ProductImage)" />
+                                </div>
+                                <div class="product-name">
+                                    @pro.ProductName
+                                </div>
+                                <div class="product-price">
+                                    @pro.ProductPrice
+                                </div>
+                            </a>
+                        </div>
+
+
+                        }
+
+                </div>
+            
+        </div>
+    </div>
+
+        
+</body>
+</html>
+
+

@@ -1,0 +1,26 @@
+﻿@model Web_bán_hàng__đồ_án_.Models.RegisterViewModel
+
+
+<h2>RegisterUser</h2>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <p>@Html.LabelFor(model => model.UserName)</p>
+    <p>@Html.EditorFor(model => model.UserName)</p>
+    <p> @Html.ValidationMessageFor(model => model.UserName)</p>
+    <p>@Html.LabelFor(model => model.Email)</p>
+    <p>@Html.EditorFor(model => model.Email)</p>
+    <p> @Html.ValidationMessageFor(model => model.Email)</p>
+    <p>@Html.LabelFor(model => model.Password)</p>
+    <p>@Html.PasswordFor(model => model.Password)</p>
+    <p>@Html.ValidationMessageFor(model => model.Password)</p>
+    <p>@Html.LabelFor(model => model.ConFirmPassword)</p>
+    <p>@Html.PasswordFor(model => model.ConFirmPassword)</p>
+    <p>@Html.ValidationMessageFor(model => model.ConFirmPassword)</p>
+    <input type="submit" value="Register" />
+}
+
+
+
+

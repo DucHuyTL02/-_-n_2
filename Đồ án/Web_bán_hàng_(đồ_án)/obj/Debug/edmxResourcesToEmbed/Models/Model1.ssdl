@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="idcate" />
+    </Key>
+    <Property Name="idcate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="Idcus" />
+    </Key>
+    <Property Name="Idcus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="namecus" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phonecus" Type="int" Nullable="false" />
+    <Property Name="emailcus" Type="varchar" MaxLength="50" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="id_order" />
+    </Key>
+    <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dateorder" Type="datetime" Nullable="false" />
+    <Property Name="idcus" Type="int" Nullable="false" />
+    <Property Name="status" Type="bit" Nullable="false" />
+    <Property Name="total_amount" Type="float" Nullable="false" />
+    <Property Name="paymentmethod" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="shippingmethod" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="shippingaddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="orderdetail">
+    <Key>
+      <PropertyRef Name="id_detail" />
+    </Key>
+    <Property Name="id_detail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idproduct" Type="int" Nullable="false" />
+    <Property Name="idorder" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="total_price" Type="float" Nullable="false" />
+    <Property Name="bill_code" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id_product" />
+    </Key>
+    <Property Name="id_product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameprod" Type="nvarchar" MaxLength="50" />
+    <Property Name="brand" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="idcate" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="stock-quantity" Type="int" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="productCate">
+    <Key>
+      <PropertyRef Name="id_product" />
+    </Key>
+    <Property Name="id_product" Type="int" Nullable="false" />
+    <Property Name="id_cate" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="service">
+    <Key>
+      <PropertyRef Name="id_service" />
+    </Key>
+    <Property Name="id_service" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name_service" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="idcus" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="permission" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_customer_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="customer" Type="Self.customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="customer">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_order_customer">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="order" Type="Self.order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="Idcus" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="idcus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderdetail_order">
+    <End Role="order" Type="Self.order" Multiplicity="1" />
+    <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="id_order" />
+      </Principal>
+      <Dependent Role="orderdetail">
+        <PropertyRef Name="idorder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderdetail_product">
+    <End Role="product" Type="Self.product" Multiplicity="1" />
+    <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="orderdetail">
+        <PropertyRef Name="idproduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_category">
+    <End Role="category" Type="Self.category" Multiplicity="1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="idcate" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="idcate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_productCate_category">
+    <End Role="category" Type="Self.category" Multiplicity="1" />
+    <End Role="productCate" Type="Self.productCate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="idcate" />
+      </Principal>
+      <Dependent Role="productCate">
+        <PropertyRef Name="id_cate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_service_customer">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="service" Type="Self.service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="Idcus" />
+      </Principal>
+      <Dependent Role="service">
+        <PropertyRef Name="idcus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DAModelStoreContainer">
+    <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderdetail" EntityType="Self.orderdetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="productCate" EntityType="Self.productCate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="service" EntityType="Self.service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_customer_User" Association="Self.FK_customer_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="customer" EntitySet="customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_order_customer" Association="Self.FK_order_customer">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="order" EntitySet="order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderdetail_order" Association="Self.FK_orderdetail_order">
+      <End Role="order" EntitySet="order" />
+      <End Role="orderdetail" EntitySet="orderdetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderdetail_product" Association="Self.FK_orderdetail_product">
+      <End Role="product" EntitySet="product" />
+      <End Role="orderdetail" EntitySet="orderdetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_category" Association="Self.FK_product_category">
+      <End Role="category" EntitySet="category" />
+      <End Role="product" EntitySet="product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_productCate_category" Association="Self.FK_productCate_category">
+      <End Role="category" EntitySet="category" />
+      <End Role="productCate" EntitySet="productCate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_service_customer" Association="Self.FK_service_customer">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="service" EntitySet="service" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

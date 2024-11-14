@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DAModelStoreContainer" CdmEntityContainer="DAEntities">
+    <EntitySetMapping Name="category">
+      <EntityTypeMapping TypeName="DAModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="idcate" ColumnName="idcate" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customer">
+      <EntityTypeMapping TypeName="DAModel.customer">
+        <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="Idcus" ColumnName="Idcus" />
+          <ScalarProperty Name="namecus" ColumnName="namecus" />
+          <ScalarProperty Name="phonecus" ColumnName="phonecus" />
+          <ScalarProperty Name="emailcus" ColumnName="emailcus" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order">
+      <EntityTypeMapping TypeName="DAModel.order">
+        <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="id_order" ColumnName="id_order" />
+          <ScalarProperty Name="dateorder" ColumnName="dateorder" />
+          <ScalarProperty Name="idcus" ColumnName="idcus" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+          <ScalarProperty Name="paymentmethod" ColumnName="paymentmethod" />
+          <ScalarProperty Name="shippingmethod" ColumnName="shippingmethod" />
+          <ScalarProperty Name="shippingaddress" ColumnName="shippingaddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderdetail">
+      <EntityTypeMapping TypeName="DAModel.orderdetail">
+        <MappingFragment StoreEntitySet="orderdetail">
+          <ScalarProperty Name="id_detail" ColumnName="id_detail" />
+          <ScalarProperty Name="idproduct" ColumnName="idproduct" />
+          <ScalarProperty Name="idorder" ColumnName="idorder" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="total_price" ColumnName="total_price" />
+          <ScalarProperty Name="bill_code" ColumnName="bill_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="product">
+      <EntityTypeMapping TypeName="DAModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="nameprod" ColumnName="nameprod" />
+          <ScalarProperty Name="brand" ColumnName="brand" />
+          <ScalarProperty Name="idcate" ColumnName="idcate" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="stock_quantity" ColumnName="stock-quantity" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productCate">
+      <EntityTypeMapping TypeName="DAModel.productCate">
+        <MappingFragment StoreEntitySet="productCate">
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="id_cate" ColumnName="id_cate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="service">
+      <EntityTypeMapping TypeName="DAModel.service">
+        <MappingFragment StoreEntitySet="service">
+          <ScalarProperty Name="id_service" ColumnName="id_service" />
+          <ScalarProperty Name="name_service" ColumnName="name_service" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="idcus" ColumnName="idcus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DAModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="DAModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="permission" ColumnName="permission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
