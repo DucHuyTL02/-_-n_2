@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Web_bán_hàng__đồ_án_.Models;
+using Web_bán_hàng__đồ_án_.Models.ViewModel;
 
 namespace Web_bán_hàng__đồ_án_.Controllers
 {
@@ -11,17 +13,26 @@ namespace Web_bán_hàng__đồ_án_.Controllers
     {
         LTWEntities csdl = new LTWEntities();   
         // GET: Product
-        public ActionResult Details(int? id)
+        public ActionResult ProductDetails(int? id)
         {
-            var product = csdl.Products.FirstOrDefault(i => i.ProductPrice == id);
-            if (product == null)
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product pro =csdl.Products.Find(id);
+            if (pro == null)
             {
                 return HttpNotFound();
             }
-
-            return View(product);
+            var product = csdl.Products.Where(p => p.CategoryID == pro.CategoryID && p.ProductID != pro.ProductID).AsQueryable();
+            ProductDetailsVM model = new ProductDetailsVM();
+            return View(model);
         }
-
+        public ActionResult ProductList()
+        {
+            var products = csdl.Products.ToList();
+            return View(products);
+        }
         public ActionResult Xacnhan()
         {
             return View();

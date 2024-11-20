@@ -18,6 +18,16 @@ namespace Web_bán_hàng__đồ_án_
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+            name: "ProductDetails",
+            url: "Product/ProductDetails/{id}",
+            defaults: new { controller = "Product", action = "ProductDetails", id = UrlParameter.Optional }
+        );
+            routes.MapRoute(
+           name: "ProductList",
+           url: "Product/List",
+           defaults: new { controller = "Product", action = "ProductList" }
+       );
 
         }
     }

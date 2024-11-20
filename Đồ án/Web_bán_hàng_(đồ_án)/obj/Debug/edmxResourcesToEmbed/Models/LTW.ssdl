@@ -51,6 +51,7 @@
     <Property Name="ProductPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="ProductImage" Type="nvarchar(max)" />
     <Property Name="StockQuantityPro" Type="int" Nullable="false" />
+    <Property Name="BrandPro" Type="nvarchar" MaxLength="255" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

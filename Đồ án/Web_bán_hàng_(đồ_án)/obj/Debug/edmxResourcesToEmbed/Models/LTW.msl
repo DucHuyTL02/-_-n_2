@@ -48,6 +48,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="LTWModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="BrandPro" ColumnName="BrandPro" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />

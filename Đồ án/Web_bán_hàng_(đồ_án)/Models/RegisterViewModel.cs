@@ -26,10 +26,9 @@ namespace Web_bán_hàng__đồ_án_.Models
         [Display(Name = "Mật Khẩu")]
         [Compare("Password",ErrorMessage ="Mật khẩu không khớp nhau")]
         public string ConFirmPassword { get; set; }
-        [Required]
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Số điện thoại")]
-        public string CustomerPhone { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
+    [RegularExpression(@"^\d{10,15}$", ErrorMessage = "Số điện thoại không hợp lệ")]
+    public string CustomerPhone { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
@@ -38,6 +37,8 @@ namespace Web_bán_hàng__đồ_án_.Models
         [Required]
         [Display(Name = "Địa chỉ")]
         public string CustomerAddress { get; set; }
+        [StringLength(1)]
+        public string UserRole { get; set; } = "C";
 
     }
 }

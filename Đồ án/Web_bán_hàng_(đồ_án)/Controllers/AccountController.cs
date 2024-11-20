@@ -4,88 +4,97 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web_bán_hàng__đồ_án_.Models;
+using Web_bán_hàng__đồ_án_.Models.ViewModel;
+using System.Security.Cryptography;  
+using System.Text;
+using System.Web.Security;
+
 
 namespace Web_bán_hàng__đồ_án_.Controllers
 {
     public class AccountController : Controller
     {
+       LTWEntities db = new LTWEntities();
 
-        // GET: LoginRegister
-       LTWEntities acc = new LTWEntities();
-        [HttpGet]
         public ActionResult Register()
         {
-            var model = new RegisterModel();
             return View();
         }
+
         [HttpPost]
-        public ActionResult Register(RegisterViewModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(RegisterVM model)
         {
             if (ModelState.IsValid)
             {
-                // Kiểm tra nếu Email đã tồn tại trong bảng Customer
-                
-                if (acc.Customers.Any(c => c.CustomerEmail== model.Email))
+                // kiem tra ten dang nhap
+                var existingUser = db.Users.SingleOrDefault(u => u.Username == model.Username);
+                if (existingUser != null)
                 {
-                    ModelState.AddModelError("Emailcus", "Email đã tồn tại.");
+                    ModelState.AddModelError("Username", "Tên đăng nhập này đã tồn tại!");
                     return View(model);
                 }
 
-                // Kiểm tra nếu Username đã tồn tại trong bảng User
-                if (acc.Users.Any(u => u.Username == model.UserName))
-                {
-                    ModelState.AddModelError("Username", "Tên đăng nhập đã tồn tại.");
-                    return View(model);
-                }
-
-                // Tạo đối tượng User
+                // neu chua ton tai thi tao ban ghi thong tin tk trong bang user
                 var user = new User
                 {
-                    Username = model.UserName,
-                    Password = model.Password,  // Lưu mật khẩu chưa mã hóa (tốt nhất là mã hóa mật khẩu trước khi lưu)
-                    UserRole = "Customer"  // Giả sử quyền mặc định là 1
+                    Username = model.Username,
+                    Password = model.Password,
+                    UserRole = "C"
+
                 };
-
-                // Thêm User vào bảng User
-                acc.Users.Add(user);
-                acc.SaveChanges();  // Lưu vào bảng User
-
-                // Tạo đối tượng Customer
+                db.Users.Add(user);
+                // va tao ban ghi thong tin khach hang trong bang customer
                 var customer = new Customer
                 {
                     CustomerName = model.CustomerName,
+                    CustomerEmail = model.CustomerEmail,
                     CustomerPhone = model.CustomerPhone,
-                    CustomerEmail = model.CustomEmail,
-                    Username = model.UserName  // Liên kết với User thông qua Username
+                    CustomerAddress = model.CustomerAddress,
+                    Username = model.Username,
                 };
-
-                // Thêm Customer vào bảng Customer
-                acc.Customers.Add(customer);
-                acc.SaveChanges();  // Lưu vào bảng Customer
-
-                // Đăng ký thành công, chuyển hướng đến trang đăng nhập
-                return RedirectToAction("Login");
+                db.Customers.Add(customer);
+                // luu thong tin tai khoan vao csdl
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Lỗi khi lưu dữ liệu: " + ex.Message);
+                }
+                return RedirectToAction("Login", "Account");
             }
-
             return View(model);
         }
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login( LoginMV model)
         {
-            var user = acc.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                // Xử lý đăng nhập thành công
-                Session["User"] = user.Username;
-                return RedirectToAction("Index", "Home");
+                
+                var existingUser = db.Users.SingleOrDefault(u => u.Username == model.Username && u.Password==model.Password&& u.UserRole=="C");
+                if (existingUser != null)
+                {
+                    Session["Username"] = existingUser.Username;
+                    Session["UserRole"] = existingUser.UserRole;
+                    FormsAuthentication.SetAuthCookie(existingUser.Username, false);
+                    return RedirectToAction("trangchu", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError(" ", "Tên đăng nhập hoặc mật khẩu không đúng");
+                }
             }
-            ModelState.AddModelError("", "Sai tên đăng nhập hoặc mật khẩu");
-            return View();
+            return View(model);
         }
 
     }
+    
 }
