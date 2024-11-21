@@ -11,21 +11,24 @@ namespace Web_bán_hàng__đồ_án_.Controllers
 {
     public class ProductController : Controller
     {
-        LTWEntities csdl = new LTWEntities();   
+        LTWEntities csdl = new LTWEntities();
         // GET: Product
+
+
         public ActionResult ProductDetails(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product pro =csdl.Products.Find(id);
+            Product pro = csdl.Products.Find(id);
             if (pro == null)
             {
                 return HttpNotFound();
             }
             var product = csdl.Products.Where(p => p.CategoryID == pro.CategoryID && p.ProductID != pro.ProductID).AsQueryable();
             ProductDetailsVM model = new ProductDetailsVM();
+            List<Product> products = csdl.Products.Take(4).ToList();
             return View(model);
         }
         public ActionResult ProductList()
@@ -57,6 +60,15 @@ namespace Web_bán_hàng__đồ_án_.Controllers
         public ActionResult RemoveItem(int id)
         {
             return View();
+        }
+        public ActionResult All(int id)
+        {
+            var product = csdl.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
         }
     }
 }

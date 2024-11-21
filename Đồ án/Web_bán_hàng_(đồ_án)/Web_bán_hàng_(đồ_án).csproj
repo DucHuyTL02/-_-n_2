@@ -224,6 +224,9 @@
     <EmbeddedResource Include="Content\Image\register.jpg" />
     <EmbeddedResource Include="Content\Image\sua.jpg" />
     <EmbeddedResource Include="Content\Image\tissort.jpg" />
+    <EmbeddedResource Include="Content\Image\baohanh.png" />
+    <EmbeddedResource Include="Content\Image\dichvukh.jpg" />
+    <EmbeddedResource Include="Content\Image\suadongho.jpg" />
     <Content Include="Content\JS\JSSlideBar.js" />
     <Content Include="Content\StyleAdmin\StyleCategory.css" />
     <Content Include="Content\StyleAdmin\StyleCrudCate.css" />
@@ -319,6 +322,7 @@
     <Content Include="Views\Watches\hai.cshtml" />
     <Content Include="Views\Watches\mot.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Product\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

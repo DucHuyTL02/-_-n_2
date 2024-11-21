@@ -44,6 +44,13 @@
         <div id="menu1">
             <ul class="menu">
                 <li> <a> @Html.ActionLink("Trang Chủ", "trangchu", "Home", new { area = "" }, new { @class = "navbar-brand" }) </a></li>
+
+               
+                    <li> <a> @Html.ActionLink("Tất cả Sản Phẩm", "All", "Home", new { area = "" }, new { @class = "navbar-brand" }) </a></li>
+
+         
+
+
                 <li class="menucon">
                     <a href="@Url.Action("MenWatches", "Home")" style="text-decoration: none;">Đồng Hồ Nam</a>                        <ul class="PhongCach">
                         <li>
@@ -218,8 +225,16 @@
                                 </ul>
                             </li>
                         </ul>
-                </li>
+                    </ul>
             </ul>
+   
+            </li>
+
+
+
+
+
+
         </div>
         <div id="menu2">
             <div class="login">
@@ -315,7 +330,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Slide Bar Layout</title>
         <!-- Link đến file CSS -->
-        <link href="~/Content/StyleCustomer/SlideBar.css" rel="stylesheet" >
+        <link href="~/Content/StyleCus/SlideBar.css" rel="stylesheet" >
     </head>
     <body>
         <!-- Slide Bar Trái -->

@@ -1,56 +1,72 @@
 ﻿@model Web_bán_hàng__đồ_án_.Models.ViewModel.RegisterVM
 
-@using Web_bán_hàng__đồ_án_.Models
-<div class="container">
-    <div class="right-section">
-        <h2>Đăng ký tài khoản</h2>
-        <link href="~/CSS/Register.css" rel="stylesheet" />
-        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
 
-            <div class="form-group">
-                <label for="Username">Tên đăng nhập:</label>
-                @Html.TextBoxFor(m => m.Username, new { @id = "Username", @class = "form-control", @required = "required" })
-            </div>
 
-            <div class="form-group">
-                <label for="Password">Mật khẩu:</label>
-                @Html.PasswordFor(m => m.Password, new { @id = "Password", @class = "form-control", @required = "required" })
-            </div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<link href="~/Content/StyleCustomer/StyleRegister.css" rel="stylesheet" />
+<!DOCTYPE HTML>
+<head lang="vi">
+    <meta name="description" content="Tài Khoản Đăng Ký" />
+    <meta charset="utf-8" />
+    <title>Đăng kí</title>
+</head>
+<body>
+    <div id="TrangRegister">
+        <div id="Register">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
 
-            <div class="form-group">
-                <label for="ConfirmPassword">Nhập lại mật khẩu:</label>
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "ConfirmPassword", @class = "form-control", @required = "required" })
-            </div>
+                <div class="form-group">
+                    <label style="color:snow" for="Username">Tên đăng nhập:</label>
+                    @Html.TextBoxFor(m => m.Username, new { @id = "Username", @class = "form-control", @required = "required" })
+                </div>
 
-            <div class="form-group">
-                <label for="CustomerName">Họ và tên:</label>
-                @Html.TextBoxFor(m => m.CustomerName, new { @id = "CustomerName", @class = "form-control", @required = "required" })
-            </div>
+                <div class="form-group">
+                    <label  style="color:snow" for="Password">Mật khẩu:</label>
+                    @Html.PasswordFor(m => m.Password, new { @id = "Password", @class = "form-control", @required = "required" })
+                </div>
 
-            <div class="form-group">
-                <label for="CustomerPhone">Số điện thoại:</label>
-                @Html.TextBoxFor(m => m.CustomerPhone, new { @id = "CustomerPhone", @class = "form-control", @required = "required" })
-            </div>
+                <div class="form-group">
+                    <label  style="color:snow" for="ConfirmPassword">Nhập lại mật khẩu:</label>
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "ConfirmPassword", @class = "form-control", @required = "required" })
+                </div>
 
-            <div class="form-group">
-                <label for="CustomerEmail">Email (nếu có):</label>
-                @Html.TextBoxFor(m => m.CustomerEmail, new { @id = "CustomerEmail", @class = "form-control", @type = "email" })
-            </div>
+                <div class="form-group">
+                    <label  style="color:snow"  for="CustomerName">Họ và tên:</label>
+                    @Html.TextBoxFor(m => m.CustomerName, new { @id = "CustomerName", @class = "form-control", @required = "required" })
+                </div>
 
-            <div class="form-group">
-                <label for="CustomerAddress">Địa chỉ:</label>
-                @Html.TextBoxFor(m => m.CustomerAddress, new { @id = "CustomerAddress", @class = "form-control", @required = "required" })
-            </div>
+                <div class="form-group">
+                    <label   style="color:snow" for="CustomerPhone">Số điện thoại:</label>
+                    @Html.TextBoxFor(m => m.CustomerPhone, new { @id = "CustomerPhone", @class = "form-control", @required = "required" })
+                </div>
 
-            <button type="submit" class="btn">Đăng ký</button>
+                <div class="form-group">
+                    <label   style="color:snow"  for="CustomerEmail">Email (nếu có):</label>
+                    @Html.TextBoxFor(m => m.CustomerEmail, new { @id = "CustomerEmail", @class = "form-control", @type = "email" })
+                </div>
 
-            <p id="error-message" style="color: red;">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </p>
+                <div class="form-group">
+                    <label   style="color:snow" for="CustomerAddress">Địa chỉ:</label>
+                    @Html.TextBoxFor(m => m.CustomerAddress, new { @id = "CustomerAddress", @class = "form-control", @required = "required" })
+                </div>
 
-            <p>Bạn đã có tài khoản? <a href="@Url.Action("Login", "Account")">Đăng nhập</a></p>
-        }
+                <button  style="color:snow" type="submit" class="btn">Đăng ký</button>
+
+                <p id="error-message" style="color: red;">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </p>
+
+                <p  style="color:snow" >Bạn đã có tài khoản? <a style="color:snow; text-decoration:none" href="@Url.Action("Login", "Account")">Đăng nhập</a></p>
+            }
+        </div>
     </div>
-</div>
+
+
+</body>

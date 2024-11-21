@@ -1,4 +1,5 @@
 ﻿
+@model IEnumerable<Web_bán_hàng__đồ_án_.Models.Product>
 
 
 @{
@@ -53,77 +54,65 @@
 </head>
 <body>
     <div class="container">
-        <h1>Danh Sách Đồng Hồ Nam</h1>
+        <h1>Danh Sách Đồng Hồ Đôi</h1>
 
         <!-- Khối ngang đầu tiên -->
         <div class="product-row">
-            <div class="product">
-                <img src="~/image/1.jpg" alt="Sản phẩm 1">
-                <div class="product-name">Đồng Hồ Nam 1</div>
-                <div class="product-price">3.500.000 đ</div>
-            </div>
-            <div class="product">
-                <img src="~/image/123aaa-1712554045.jpg" alt="Sản phẩm 2">
-                <div class="product-name">Đồng Hồ Nam 2</div>
-                <div class="product-price">4.200.000 đ</div>
-            </div>
-            <div class="product">
-                <img src="~/image/2.jpg" alt="Sản phẩm 3">
-                <div class="product-name">Đồng Hồ Nam 3</div>
-                <div class="product-price">5.100.000 đ</div>
-            </div>
-            <div class="product">
-                <img src="~/image/3.jpg" alt="Sản phẩm 4">
-                <div class="product-name">Đồng Hồ Nam 4</div>
-                <div class="product-price">2.800.000 đ</div>
+            <div class="container">
+
+
+                <!-- Khối chứa các sản phẩm -->
+                @foreach (var pro in Model)
+
+                {
+                    <div class="product">
+                        <a href="@Url.Action("ProductDetails", "Product", new { id = pro.ProductID })">
+                            <img src="@Url.Content(pro.ProductImage)" alt="@pro.ProductName" />
+                            <div class="product-name">@pro.ProductName</div>
+                            <div class="product-price">@pro.ProductPrice.ToString("C")</div>
+                        </a>
+                    </div>
+                }
             </div>
         </div>
 
         <!-- Khối ngang thứ hai -->
         <div class="product-row">
-            <div class="product">
-                <img src="~/image/33.jpg" alt="Sản phẩm 5">
-                <div class="product-name">Đồng Hồ Nam 5</div>
-                <div class="product-price">6.500.000 đ</div>
-            </div>
-            <div class="product">
-                <img src="~/image/4.jpg" alt="Sản phẩm 6">
-                <div class="product-name">Đồng Hồ Nam 6</div>
-                <div class="product-price">7.200.000 đ</div>
-            </div>
-            <div class="product">
-                <img src="~/image/44.jpg" alt="Sản phẩm 7">
-                <div class="product-name">Đồng Hồ Nam 7</div>
-                <div class="product-price">8.100.000 đ</div>
-            </div>
-            <div class="product">
-                <img src="~/image/bán-đồng-hồ-rolex-giá-rẻ-1.jpg" alt="Sản phẩm 8">
-                <div class="product-name">Đồng Hồ Nam 8</div>
-                <div class="product-price">3.800.000 đ</div>
+            <div class="container">
+
+                <!-- Khối chứa các sản phẩm -->
+                @foreach (var pro in Model)
+
+                {
+                    <div class="product">
+                        <a href="@Url.Action("ProductDetails", "Product", new { id = pro.ProductID })">
+                            <img src="@Url.Content(pro.ProductImage)" alt="@pro.ProductName" />
+                            <div class="product-name">@pro.ProductName</div>
+                            <div class="product-price">@pro.ProductPrice.ToString("C")</div>
+                        </a>
+                    </div>
+                }
+
             </div>
         </div>
 
         <!-- Khối ngang thứ ba -->
         <div class="product-row">
-            <div class="product">
-                <img src="~/image/tissort.jpg" alt="Sản phẩm 9">
-                <div class="product-name">Đồng Hồ Nam 9</div>
-                <div class="product-price">2.500.000 đ</div>
-            </div>
-            <div class="product">
-                <img src="~/image/1.jpg" alt="Sản phẩm 10">
-                <div class="product-name">Đồng Hồ Nam 10</div>
-                <div class="product-price">4.500.000 đ</div>
-            </div>
-            <div class="product">
-                <img src="~/image/2.jpg" alt="Sản phẩm 11">
-                <div class="product-name">Đồng Hồ Nam 11</div>
-                <div class="product-price">5.900.000 đ</div>
-            </div>
-            <div class="product">
-                <img src="~/image/3.jpg" alt="Sản phẩm 12">
-                <div class="product-name">Đồng Hồ Nam 12</div>
-                <div class="product-price">3.300.000 đ</div>
+            <div class="container">
+
+                <!-- Khối chứa các sản phẩm -->
+                @foreach (var pro in Model)
+
+                {
+                    <div class="product">
+                        <a href="@Url.Action("ProductDetails", "Product", new { id = pro.ProductID })">
+                            <img src="@Url.Content(pro.ProductImage)" alt="@pro.ProductName" />
+                            <div class="product-name">@pro.ProductName</div>
+                            <div class="product-price">@pro.ProductPrice.ToString("C")</div>
+                        </a>
+                    </div>
+                }
+
             </div>
         </div>
 
