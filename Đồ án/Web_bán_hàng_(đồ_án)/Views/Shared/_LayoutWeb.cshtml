@@ -45,190 +45,92 @@
             <ul class="menu">
                 <li> <a> @Html.ActionLink("Trang Chủ", "trangchu", "Home", new { area = "" }, new { @class = "navbar-brand" }) </a></li>
 
-               
-                    <li> <a> @Html.ActionLink("Tất cả Sản Phẩm", "All", "Home", new { area = "" }, new { @class = "navbar-brand" }) </a></li>
 
-         
+                <li> <a> @Html.ActionLink("Tất cả Sản Phẩm", "All", "Product", new { area = "" }, new { @class = "navbar-brand" }) </a></li>
+
+
 
 
                 <li class="menucon">
-                    <a href="@Url.Action("MenWatches", "Home")" style="text-decoration: none;">Đồng Hồ Nam</a>                        <ul class="PhongCach">
+                    <a style="text-decoration:none" , href="@Url.Action("FilterWatches", "Home", new { category = 1 })">Đồng Hồ Nam</a>
+                    <ul class="PhongCach">
                         <li>
                             <a href="#">Khoảng giá</a>
                             <ul class="Khoanggia">
-                                <li><a href="#">Dưới 2 Triệu</a></li>
-                                <li><a href="#">Từ 2-3 Triệu</a></li>
-                                <li><a href="#">Từ 3-4 Triệu</a></li>
-                                <li><a href="#">Từ 4-5 Triệu</a></li>
-                                <li><a href="#">Trên 5 Triệu</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { giua = "Khoảng giá", filterValue = "Dưới 2 Triệu", category = 1 })">Dưới 2 Triệu</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { giua = "Khoảng giá", filterValue = "Từ 2-6 Triệu", category = 1 })">Từ 2-6 Triệu</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { giua = "Khoảng giá", filterValue = "Trên 6 Triệu", category = 1 })">Trên 6 Triệu</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="#">Thương hiệu</a>
                             <ul class="Thuonghieu">
-                                <li><a href="#">Casio</a></li>
-                                <li><a href="#">Citizen</a></li>
-                                <li><a href="#">KOI</a></li>
-                                <li><a href="#">Orient</a></li>
-                                <li><a href="#">G-Shock</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Chất liệu dây</a>
-                            <ul class="Day">
-                                <li><a href="#">Dây kim loại</a></li>
-                                <li><a href="#">Dây da</a></li>
-                                <li><a href="#">Dây nhựa/Cao su</a></li>
-                                <li><a href="#">Dây Titanium</a></li>
-                                <li><a href="#">Dây vải</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Swiss made(Thụy sĩ)</a>
-                            <ul class="Swissmade">
-                                <li><a href="#">Longgines</a></li>
-                                <li><a href="#">Doxa</a></li>
-                                <li><a href="#">Titoni</a></li>
-                                <li><a href="#">Tissot</a></li>
-                                <li><a href="#">Frederique Constant</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Các dòng đặc biệt</a>
-                            <ul class="Dacbiet">
-                                <li><a href="#">Đồng hồ nam Nhật Bản</a></li>
-                                <li><a href="#">Đồng hồ siêu mỏng</a></li>
-                                <li><a href="#">Đồng hồ đính kim cương</a></li>
-                                <li><a href="#">Đồng hồ lộ máy ( Skeleton)</a></li>
-                                <li><a href="#">Đồng hồ vàng 18K</a></li>
-                                <li><a href="#">Đồng hồ phiên bản giới hạn</a></li>
-                                <li><a href="#">Đồng hồ nam đính đá</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "Casio", category = 1 })">Casio</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "Citizen", category = 1 })">Citizen</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "KOI", category = 1 })">KOI</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "Orient", category = 1 })">Orient</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "G-Shock", category = 1 })">G-Shock</a></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
-                <li class="menucon">
-                    <a href="@Url.Action("WomenWatches", "Home")" style="text-decoration: none;">Đồng Hồ Nữ</a>
-                    <ul class="PhongCach">
-                        <ul class="PhongCach">
-                            <li>
-                                <a href="#">Khoảng giá</a>
-                                <ul class="Khoanggia">
-                                    <li><a href="#">Dưới 2 Triệu</a></li>
-                                    <li><a href="#">Từ 2-3 Triệu</a></li>
-                                    <li><a href="#">Từ 3-4 Triệu</a></li>
-                                    <li><a href="#">Từ 4-5 Triệu</a></li>
-                                    <li><a href="#">Trên 5 Triệu</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Thương hiệu</a>
-                                <ul class="Thuonghieu">
-                                    <li><a href="#">Casio</a></li>
-                                    <li><a href="#">Citizen</a></li>
-                                    <li><a href="#">Daniel Wellington</a></li>
-                                    <li><a href="#">Soga</a></li>
-                                    <li><a href="#">Fossil</a></li>
 
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Chất liệu dây</a>
-                                <ul class="Day">
-                                    <li><a href="#">Dây kim loại</a></li>
-                                    <li><a href="#">Dây da</a></li>
-                                    <li><a href="#">Dây lưới</a></li>
-                                    <li><a href="#">Dây dạng lắc tay</a></li>
-                                    <li><a href="#">Dây vải</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Swiss made(Thụy sĩ)</a>
-                                <ul class="Swissmade">
-                                    <li><a href="#">Longgines</a></li>
-                                    <li><a href="#">Doxa</a></li>
-                                    <li><a href="#">Titoni</a></li>
-                                    <li><a href="#">Tissot</a></li>
-                                    <li><a href="#">Frederique Constant</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Các dòng đặc biệt</a>
-                                <ul class="Dacbiet">
-                                    <li><a href="#">Đồng hồ nữ Nhật Bản</a></li>
-                                    <li><a href="#">Đồng hồ siêu mỏng</a></li>
-                                    <li><a href="#">Đồng hồ đính kim cương</a></li>
-                                    <li><a href="#">Đồng hồ khám xà cừ</a></li>
-                                    <li><a href="#">Đồng hồ nam đính đá</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                <li class="menucon">
+                    <a style="text-decoration:none" , href="@Url.Action("FilterWatches", "Home", new { category = 2 })">Đồng Hồ Nữ</a>
+                    <ul class="PhongCach">
+                        <li>
+                            <a href="#">Khoảng giá</a>
+                            <ul class="Khoanggia">
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { giua = "Khoảng giá", filterValue = "Dưới 2 Triệu", category = 2 })">Dưới 2 Triệu</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { giua = "Khoảng giá", filterValue = "Từ 2-6 Triệu", category = 2 })">Từ 2-6 Triệu</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { giua = "Khoảng giá", filterValue = "Trên 6 Triệu", category = 2 })">Trên 6 Triệu</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Thương hiệu</a>
+                            <ul class="Thuonghieu">
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "Casio", category = 2 })">Casio</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "Citizen", category = 2 })">Citizen</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "KOI", category = 2 })">KOI</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "Orient", category = 2 })">Orient</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "G-Shock", category = 2 })">G-Shock</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
 
 
+
                 <li class="menucon">
-                    <a href="@Url.Action("CoupleWatches", "Home")" style="text-decoration: none;">Đồng Hồ Đôi</a>
+                    <a style="text-decoration:none", href="@Url.Action("FilterWatches", "Home", new { category = 3 })">Đồng Hồ Đôi</a>
                     <ul class="PhongCach">
-
-
-                        <ul class="PhongCach">
-                            <li>
-                                <a href="#">Khoảng giá</a>
-                                <ul class="Khoanggia">
-                                    <li><a href="#">Dưới 2 Triệu</a></li>
-                                    <li><a href="#">Từ 2-3 Triệu</a></li>
-                                    <li><a href="#">Từ 3-4 Triệu</a></li>
-                                    <li><a href="#">Từ 4-5 Triệu</a></li>
-                                    <li><a href="#">Trên 5 Triệu</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Thương hiệu</a>
-                                <ul class="Thuonghieu">
-                                    <li><a href="#">Casio</a></li>
-                                    <li><a href="#">Citizen</a></li>
-                                    <li><a href="#">Daniel Wellington</a></li>
-                                    <li><a href="#">Soga</a></li>
-                                    <li><a href="#">Fossil</a></li>
-
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Chất liệu dây</a>
-                                <ul class="Day">
-                                    <li><a href="#">Dây kim loại</a></li>
-                                    <li><a href="#">Dây da</a></li>
-                                    <li><a href="#">Dây lưới</a></li>
-                                    <li><a href="#">Dây dạng lắc tay</a></li>
-                                    <li><a href="#">Dây vải</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Swiss made(Thụy sĩ)</a>
-                                <ul class="Swissmade">
-                                    <li><a href="#">Longgines</a></li>
-                                    <li><a href="#">Doxa</a></li>
-                                    <li><a href="#">Titoni</a></li>
-                                    <li><a href="#">Tissot</a></li>
-                                    <li><a href="#">Frederique Constant</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Các dòng đặc biệt</a>
-                                <ul class="Dacbiet">
-                                    <li><a href="#">Đồng hồ nữ Nhật Bản</a></li>
-                                    <li><a href="#">Đồng hồ siêu mỏng</a></li>
-                                    <li><a href="#">Đồng hồ đính kim cương</a></li>
-                                    <li><a href="#">Đồng hồ khám xà cừ</a></li>
-                                    <li><a href="#">Đồng hồ nam đính đá</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <!-- Phần Khoảng Giá -->
+                        <li>
+                            <a href="#">Khoảng giá</a>
+                            <ul class="Khoanggia">
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { giua = "Khoảng giá", filterValue = "Dưới 2 Triệu", category = 3 })">Dưới 2 Triệu</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { giua = "Khoảng giá", filterValue = "Từ 2-6 Triệu", category = 3 })">Từ 2-6 Triệu</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { giua = "Khoảng giá", filterValue = "Trên 6 Triệu", category = 3 })">Trên 6 Triệu</a></li>
+                            </ul>
+                        </li>
+                        <!-- Phần Thương Hiệu -->
+                        <li>
+                            <a href="#">Thương hiệu</a>
+                            <ul class="Thuonghieu">
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "Casio", category = 3 })">Casio</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "Citizen", category = 3 })">Citizen</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "KOI", category = 3 })">KOI</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "Orient", category = 3 })">Orient</a></li>
+                                <li><a href="@Url.Action("FilterWatches", "Home", new { filterType = "Brand", filterValue = "G-Shock", category = 3 })">G-Shock</a></li>
+                            </ul>
+                        </li>
                     </ul>
+                </li>
+
+
             </ul>
    
-            </li>
+        
 
 
 

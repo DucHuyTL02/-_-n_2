@@ -323,6 +323,7 @@
     <Content Include="Views\Watches\mot.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Product\All.cshtml" />
+    <Content Include="Views\Home\FilterWatches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

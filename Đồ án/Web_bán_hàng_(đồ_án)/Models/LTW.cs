@@ -7,3 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using static System.Data.Entity.Migrations.Model.UpdateDatabaseOperation;
+
+

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,6 +14,12 @@ namespace Web_bán_hàng__đồ_án_.Controllers
     {
         LTWEntities csdl = new LTWEntities();
         // GET: Product
+
+
+
+
+            // Các DbSet khác nếu cần
+        
 
 
         public ActionResult ProductDetails(int? id)

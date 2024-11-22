@@ -1,11 +1,11 @@
 ﻿
 
-@model IEnumerable<Web_bán_hàng__đồ_án_.Models.Watch>
+@model IEnumerable<Web_bán_hàng__đồ_án_.Models.Product>
 
 @{
     ViewBag.Title = "Giohang";
     Layout = "~/Views/Shared/_LayoutWeb.cshtml";
-   
+
 
 }
 
@@ -67,46 +67,39 @@
     </style>
 </head>
 <body>
+
     <div class="cart-container">
-        <div class="cart-item" data-price="100">
-            <img src="~/image/1.jpg" alt="Product Image">
-            <div class="cart-item-info">
-                <h2>Tên Sản Phẩm</h2>
-                <p>
-                    Số lượng:
-                    <input type="number" class="quantity" value="1" min="1" onchange="updateCart(this)">
-                </p>
-                <p class="item-total">Tổng tiền: $100</p>
-            </div>
+        <h3 class="mb-4">Giỏ Hàng</h3>
+        <div>
+            @foreach (var item in Model)
+            {
+                <div class="cart-item row">
+                    <div class="col-md-2">
+                        <img src="@item.ProductImage" alt="@item.ProductName" class="product-image" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5>@item.ProductName</h5>
+
+                    </div>
+                    <div class="col-md-2">
+                        <p>Đơn Giá: @item.ProductPrice.ToString("N0")đ</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>Số Lượng: @item.StockQuantityPro</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="total">Thành Tiền: @item.ProductPrice.ToString("N0")đ</p>
+                    </div>
+                </div>
+            }
         </div>
-        <!-- Thêm nhiều sản phẩm khác nếu cần -->
-        <!--  <div class="cart-total">
-          <span>Tổng tiền đơn hàng:</span>
-          <span id="cart-total">$100</span>  -->
-    </div>
-    <div style="text-align:center">
-
-        <button type="submit" class="btn-login">   @Html.ActionLink("Thanh Toán", "Thanhtoan", "Giohang", new { area = "" }, new { @class = "btn-login", style = "text-decoration:none;" }) </button>
-
+        <div class="mt-4 text-end">
+            <a href="/Checkout" class="btn btn-primary">Mua Hàng</a>
+        </div>
     </div>
 
-    <script>
-        function updateCart(element) {
-            const cartItem = element.closest('.cart-item');
-            const price = parseFloat(cartItem.getAttribute('data-price'));
-            const quantity = parseInt(element.value);
-            const itemTotal = price * quantity;
-            cartItem.querySelector('.item-total').textContent = `Tổng tiền: $${itemTotal}`;
 
-            let cartTotal = 0;
-            document.querySelectorAll('.cart-item').forEach(item => {
-                const itemPrice = parseFloat(item.getAttribute('data-price'));
-                const itemQuantity = parseInt(item.querySelector('.quantity').value);
-                cartTotal += itemPrice * itemQuantity;
-            });
-            document.getElementById('cart-total').textContent = `$${cartTotal}`;
-        }
-    </script>
+
 </body>
 </html>
 
