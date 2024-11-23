@@ -178,6 +178,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>LTW.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\CartItem.cs" />
     <Compile Include="Models\ViewModel\LoginMV.cs" />
     <Compile Include="Models\ViewModel\ProductDetailsVM.cs" />
     <Compile Include="Models\ViewModel\RegisterVM.cs" />
@@ -327,6 +328,7 @@
     <Content Include="Views\Product\Xacnhandon.cshtml" />
     <Content Include="Views\Product\Giohang1.cshtml" />
     <Content Include="Views\Account\Customer.cshtml" />
+    <Content Include="Views\Product\OrderSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

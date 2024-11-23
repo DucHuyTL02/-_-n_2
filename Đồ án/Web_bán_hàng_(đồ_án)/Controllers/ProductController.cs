@@ -15,7 +15,7 @@ namespace Web_bán_hàng__đồ_án_.Controllers
         LTWEntities csdl = new LTWEntities();
 
 
-        public ActionResult ProductDetails(int? id)
+        public ActionResult ProductDetails(int? id, int? quantity, int? page)
         {
             if (id == null)
             {
@@ -28,9 +28,18 @@ namespace Web_bán_hàng__đồ_án_.Controllers
             }
             var product = csdl.Products.Where(p => p.CategoryID == pro.CategoryID && p.ProductID != pro.ProductID).AsQueryable();
             ProductDetailsVM model = new ProductDetailsVM();
-            List<Product> products = csdl.Products.Take(4).ToList();
+            int pageNumber = page ?? 1;
+            int pageSize = model.PageSize;
+            model.product = pro;
+            model.RelatedProducts = product.OrderByDescending(p => p.ProductID).Take(8).ToPagedList(pageNumber, pageSize);
+            model.TopProducts = product.OrderBy(p => p.OrderDetails.Count()).Take(10).ToPagedList(pageNumber, pageSize);
+            if (quantity.HasValue)
+            {
+                model.quantity = quantity.Value;
+            }
             return View(model);
         }
+    
         public ActionResult ProductList()
         {
             var products = csdl.Products.ToList();
@@ -41,10 +50,44 @@ namespace Web_bán_hàng__đồ_án_.Controllers
             return View();
         }
 
-        public ActionResult Thanhtoan()
+        public ActionResult AddToCart(int id, int quantity = 1)
         {
-            return View();
+            // Lấy giỏ hàng từ session
+            var cart = Session["Cart"] as List<CartItem>;
+            if (cart == null)
+            {
+                cart = new List<CartItem>(); // Tạo giỏ hàng nếu chưa có
+            }
+
+            // Kiểm tra sản phẩm đã có trong giỏ chưa
+            var existingItem = cart.FirstOrDefault(x => x.Product.ProductID == id);
+            if (existingItem != null)
+            {
+                // Nếu đã có, tăng số lượng
+                existingItem.Quantity += quantity;
+            }
+            else
+            {
+                // Nếu chưa có, thêm sản phẩm mới
+                var product = csdl.Products.Find(id); // Tìm sản phẩm trong database
+                if (product != null)
+                {
+                    cart.Add(new CartItem
+                    {
+                        Product = product,
+                        Quantity = quantity
+                    });
+                }
+            }
+
+            // Cập nhật lại session
+            Session["Cart"] = cart;
+
+            // Chuyển hướng về trang giỏ hàng
+            return RedirectToAction("Giohang", "Product");
         }
+
+
 
 
 
@@ -54,157 +97,41 @@ namespace Web_bán_hàng__đồ_án_.Controllers
 
         public ActionResult Giohang()
         {
-            List<Product> giohang = Session["Giohang"] as List<Product>;
-            if (giohang == null)
+            // Lấy giỏ hàng từ session
+            var cart = Session["Cart"] as List<CartItem>;
+            if (cart == null || cart.Count == 0)
             {
-                giohang = new List<Product>(); 
-                Session["Giohang"] = giohang;
+                ViewBag.TotalAmount = 0; // Tổng tiền là 0 khi giỏ hàng trống
+                return View(new List<CartItem>()); // Trả về view với giỏ hàng trống
             }
 
-            return View(giohang); 
+            // Tính tổng tiền
+            ViewBag.TotalAmount = cart.Sum(item => item.Product.ProductPrice * item.Quantity);
+
+            return View(cart);
         }
 
 
-
-        private const string CartSessionKey = "Giohang";
-            public ActionResult Giohang(int? productId)
-            {
-                var product = csdl.Products.FirstOrDefault(p => p.ProductID == productId);
-                if (product == null)
-                {
-                    return View(); 
-                }
-
-                var cart = Session[CartSessionKey] as List<Product> ?? new List<Product>();
-
-                var cartItem = cart.FirstOrDefault(c => c.ProductID == productId);
-                if (cartItem == null)
-                {
-                    cart.Add(new Product
-                    {
-                        ProductID = product.ProductID,
-                        ProductName = product.ProductName,
-                        ProductPrice = product.ProductPrice,
-                        StockQuantityPro = 1,
-                        ProductImage = product.ProductImage
-                    });
-                }
-                else
-                {
-                    cartItem.StockQuantityPro++;
-                }
-
-                Session[CartSessionKey] = cart;
-
-                return RedirectToAction("Giohang", "Product");
-            }
-
-            public ActionResult Giohang1()
-            {
-                var cart = Session[CartSessionKey] as List<Product> ?? new List<Product>();
-                return View(cart);
-            }
-
-        [HttpPost]
-
-
-
-
-        public ActionResult Thanhtoan(string PaymentMethod)
+        public ActionResult Thanhtoan()
         {
-            var cart = Session[CartSessionKey] as List<Product>;
-            if (cart == null || !cart.Any())
+            var cart = Session["Cart"] as List<CartItem>;
+            if (cart == null || cart.Count == 0)
             {
-                return RedirectToAction("Giohang", "Product"); 
+                return RedirectToAction("Giohang");
             }
 
-            var order = new Order
-            {
-                OrderDate = DateTime.Now,
-                TotalAmount = cart.Sum(c => c.StockQuantityPro * c.ProductPrice),
-                ShippingMethod = PaymentMethod,
-                PaymentStatus = "Đã giao",
-            };
+            // Xử lý thanh toán tại đây (ví dụ: lưu vào database)
 
-            csdl.Orders.Add(order);
-            csdl.SaveChanges();
+            // Sau khi thanh toán xong, xóa giỏ hàng
+            Session["Cart"] = null;
 
-            foreach (var item in cart)
-            {
-                var orderDetail = new OrderDetail
-                {
-                    OrderID = order.OrderID,
-                    ProductID = item.ProductID,
-                    Quantity = item.StockQuantityPro,
-                    UnitPrice = item.ProductPrice
-                };
-                csdl.OrderDetails.Add(orderDetail);
-            }
-            csdl.SaveChanges();
-
-            Session.Remove(CartSessionKey);
-
-            if (PaymentMethod == "bank")
-            {
-                return RedirectToAction("Thanhtoan", "Product", new { orderId = order.OrderID });
-            }
-            else
-            {
-                return RedirectToAction("Xacnhandon", "Product", new { orderId = order.OrderID });
-            }
+            return RedirectToAction("OrderSuccess");
         }
 
-
-
-
-        public ActionResult Xacnhandon(int orderId)
+        public ActionResult OrderSuccess()
         {
-            var order = csdl.Orders.FirstOrDefault(o => o.OrderID == orderId);
-
-            if (order == null)
-            {
-                return HttpNotFound("Không tìm thấy đơn hàng."); 
-            }
-
-            if (order.PaymentStatus == "bank")
-            {
-                order.PaymentStatus = "Đã Giao"; 
-            }
-            else
-            {
-                order.PaymentStatus = "Chưa Giao"; 
-            }
-
-            csdl.SaveChanges();
-
-            return View(order);
+            return View(); // Tạo view thông báo đặt hàng thành công
         }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

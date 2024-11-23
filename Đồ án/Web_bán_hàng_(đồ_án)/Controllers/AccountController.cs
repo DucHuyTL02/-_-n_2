@@ -98,7 +98,11 @@ namespace Web_bán_hàng__đồ_án_.Controllers
 
         public ActionResult Customer()
         {
-            string currentUser = User.Identity.Name;
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            string currentUser = Session["Username"].ToString();
 
             var accountInfo = db.Users
                 .Where(u => u.Username == currentUser)
@@ -128,9 +132,11 @@ namespace Web_bán_hàng__đồ_án_.Controllers
         [HttpPost]
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Account");
+            Session.Clear(); // Xóa toàn bộ Session
+            FormsAuthentication.SignOut(); // Xóa cookie đăng nhập (nếu có)
+            return RedirectToAction("Login", "Account"); // Chuyển hướng về trang Login
         }
+
 
 
 

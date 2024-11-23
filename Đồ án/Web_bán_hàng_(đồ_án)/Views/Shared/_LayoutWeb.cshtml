@@ -102,7 +102,7 @@
 
 
                 <li class="menucon">
-                    <a style="text-decoration:none", href="@Url.Action("FilterWatches", "Home", new { category = 3 })">Đồng Hồ Đôi</a>
+                    <a style="text-decoration:none" , href="@Url.Action("FilterWatches", "Home", new { category = 3 })">Đồng Hồ Đôi</a>
                     <ul class="PhongCach">
                         <li>
                             <a href="#">Khoảng giá</a>
@@ -127,8 +127,8 @@
 
 
             </ul>
-   
-        
+
+
 
 
 
@@ -137,9 +137,26 @@
 
         </div>
         <div id="menu2">
-            <div class="login">
-                <button type="submit" class="btn-login">   @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "btn-login", style = "text-decoration:none;" }) </button>
-            </div>
+            @if (Session["Username"] != null)
+            {
+                <div class="welcome">
+                    <span>Xin chào, @Session["Username"]!</span>
+                    <a href="@Url.Action("Customer", "Customer")">Trang cá nhân</a>
+                    <form action="/Customer/Logout" method="post">
+                        <button type="submit" class="btn-logout">Đăng xuất</button>
+                    </form>
+                </div>
+            }
+            else
+            {
+                <div class="login">
+                    <button type="submit" class="btn-login">
+                        @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "btn-login", style = "text-decoration:none;" })
+                    </button>
+                </div>
+            }
+        
+
             <div class="giohang">
                 <button type="submit" class="btn-giohang">  @Html.ActionLink("Giỏ Hàng", "Giohang", "Product", new { area = "" }, new { @class = "btn-giohang", style = "text-decoration:none;" }) </button>
             </div>
@@ -229,11 +246,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Slide Bar Layout</title>
-        <!-- Link đến file CSS -->
         <link href="~/Content/StyleCus/SlideBar.css" rel="stylesheet" >
     </head>
     <body>
-        <!-- Slide Bar Trái -->
         <button class="chat-button">
             <div class="left-slide-bar" onclick="toggleChatBox()">
                 <span class="chat-icon">💬</span>

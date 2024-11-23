@@ -1,17 +1,10 @@
 ﻿
 
-@model IEnumerable<Web_bán_hàng__đồ_án_.Models.Product>
-
+@model List<Web_bán_hàng__đồ_án_.Models.ViewModel.CartItem>
 @{
     ViewBag.Title = "Giohang";
     Layout = "~/Views/Shared/_LayoutWeb.cshtml";
-
-
 }
-
-<!--  <link rel="stylesheet" href="~/wwwroot/css/styles.css" />
-<script src="~/wwwroot/js/scripts.js"></script>/> -->
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -19,109 +12,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giỏ Hàng</title>
     <style>
+        . /* Giao diện chung */
         .cart-container {
             width: 80%;
-            margin: auto;
-            border: 1px solid #ddd;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+
+        cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .cart-table th, .cart-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+
+
+
+        .cart-container h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Giao diện sản phẩm trong giỏ hàng */
+        .cart-items {
+            display: flex;
+            flex-direction: column;
         }
 
         .cart-item {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
+            padding: 15px;
             border-bottom: 1px solid #ddd;
+            align-items: center;
+            justify-content: space-between;
         }
 
             .cart-item img {
-                width: 100px;
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+                margin-right: 20px;
             }
 
-        .cart-item-info {
-            flex: 1;
-            padding: 0 20px;
+            .cart-item h4 {
+                font-size: 18px;
+                margin: 0;
+            }
+
+            .cart-item p {
+                font-size: 16px;
+                color: #555;
+            }
+
+        /* Tóm tắt giỏ hàng */
+        .cart-summary {
+            margin-top: 20px;
+            text-align: right;
         }
 
-        .cart-total {
+            .cart-summary h3 {
+                font-size: 20px;
+                font-weight: bold;
+                color: #333;
+            }
+
+        /* Thông tin khách hàng */
+        .customer-info {
+            margin-top: 30px;
+        }
+
+            .customer-info h4 {
+                font-size: 22px;
+                margin-bottom: 15px;
+                color: #333;
+            }
+
+            .customer-info form input {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+
+        .payment-options {
+            margin: 10px 0;
+        }
+
+            .payment-options label {
+                display: block;
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        /* Khi giỏ hàng rỗng */
+        .cart-container p {
+            font-size: 18px;
+            text-align: center;
+            color: #666;
+        }
+
+
+        .cart-actions {
+            margin-top: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            font-size: 1.2em;
-            border-top: 1px solid #ddd;
         }
 
-        .checkout-button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            color: white;
+            .cart-actions .btn {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+                .cart-actions .btn:hover {
+                    background-color: #0056b3;
+                }
+
+        .cart-empty {
             text-align: center;
-            text-decoration: none;
-            font-size: 1.2em;
-            border-radius: 5px;
-            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+            margin: 20px 0;
+        }
+
+        .note {
+            font-size: 16px;
+            color: #888;
+            text-align: center;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
     <div class="cart-container">
-        <h2>Giỏ Hàng</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Hình Ảnh</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Số Lượng</th>
-                    <th>Giá</th>
-                    <th>Tổng</th>
-                    <th>Xóa</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+        <h2>Giỏ Hàng Của Bạn</h2>
+
+        <!-- Nếu giỏ hàng trống -->
+        @if (Model == null || !Model.Any())
+        {
+            <div class="cart-empty">
+                <p>Hiện tại giỏ hàng của bạn chưa có sản phẩm nào.</p>
+                <a href="@Url.Action("ProductDetails", "Product")" class="btn">Tiếp tục mua sắm</a>
+            </div>
+        }
+        else
+        {
+            <table class="cart-table">
+                <thead>
                     <tr>
-                        <td><img src="@item.ProductImage" alt="@item.ProductName" style="width: 100px;"></td>
-                        <td>@item.ProductName</td>
-                        <td>@item.StockQuantityPro</td>
-                        <td>@String.Format("{0:0,0} đ", item.ProductPrice)</td>
-                        <td>@String.Format("{0:0,0} đ", item.StockQuantityPro * item.ProductPrice)</td>
-                        <td>
-                            <a href="@Url.Action("Remove", "Cart", new { productId = item.ProductID })" class="btn btn-danger">Xóa</a>
-                        </td>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Product.ProductName</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Product.ProductPrice.ToString("C0")</td>
+                            <td>@(item.Product.ProductPrice * item.Quantity).ToString("C0")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-        <div class="total">
-            <h3>Tổng cộng: @String.Format("{0:0,0} đ", Model.Sum(x => x.StockQuantityPro * x.ProductPrice))</h3>
-        </div>
+            <div class="cart-summary">
+                <h3>Tổng Tiền: @ViewBag.TotalAmount.ToString("C0")</h3>
+            </div>
 
-        <div class="checkout-methods">
-            <h3>Phương Thức Thanh Toán</h3>
-            <form action="@Url.Action("Checkout", "Cart")" method="post">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="PaymentMethod" value="bank" id="paymentBank" checked>
-                    <label class="form-check-label" for="paymentBank">
-                        Chuyển khoản ngân hàng
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="PaymentMethod" value="cod" id="paymentCOD">
-                    <label class="form-check-label" for="paymentCOD">
-                        Thanh toán khi nhận hàng
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Đặt Hàng</button>
-            </form>
-        </div>
+            <div class="cart-actions">
+                <a href="@Url.Action("Index", "Product")" class="btn">Tiếp tục mua sắm</a>
+                <a href="@Url.Action("Checkout", "Product")" class="btn checkout-btn">Thanh Toán</a>
+            </div>
+        }
     </div>
-
 
 
 </body>

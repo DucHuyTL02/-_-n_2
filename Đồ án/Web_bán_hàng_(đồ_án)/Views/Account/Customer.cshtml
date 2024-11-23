@@ -102,13 +102,20 @@
             <div class="welcome">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <span>Xin chào, @ViewBag.AccountInfo?.Username</span>
+                   <div class="welcome">
+                       <span>Xin chào, @User.Identity.Name!</span>
+                       <form action="/Customer/Logout" method="post">
+                           <button type="submit" class="btn-logout">Đăng xuất</button>
+                       </form>
+                   </div>
                 }
                 else
                 {
-                    <button type="submit" class="btn-login">
-                        @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "btn-login", style = "text-decoration:none;" })
-                    </button>
+            <div class="login">
+                <button type="submit" class="btn-login">
+                    @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "btn-login", style = "text-decoration:none;" })
+                </button>
+            </div>
                 }
             </div>
         </div>
