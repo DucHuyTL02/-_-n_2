@@ -314,7 +314,6 @@
     <Content Include="Views\Shared\_LayoutLoginRegister.cshtml" />
     <Content Include="Views\Product\Giohang.cshtml" />
     <Content Include="Views\Product\Thanhtoan.cshtml" />
-    <Content Include="Views\Product\Xacnhan.cshtml" />
     <Content Include="Views\Product\ProductDetails.cshtml" />
     <Content Include="Views\Watches\ba.cshtml" />
     <Content Include="Views\Watches\bon.cshtml" />
@@ -324,6 +323,10 @@
     <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Product\All.cshtml" />
     <Content Include="Views\Home\FilterWatches.cshtml" />
+    <Content Include="Views\Product\tragop.cshtml" />
+    <Content Include="Views\Product\Xacnhandon.cshtml" />
+    <Content Include="Views\Product\Giohang1.cshtml" />
+    <Content Include="Views\Account\Customer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

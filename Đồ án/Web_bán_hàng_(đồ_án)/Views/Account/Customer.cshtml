@@ -1,0 +1,166 @@
+﻿@model IEnumerable<Web_bán_hàng__đồ_án_.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+<h2>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trang Người Dùng</title>
+        <style>
+            body {
+                background-color: #000;
+                color: #fff;
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            #menu2 {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+                background-color: #222;
+            }
+
+            .login {
+                color: #fff;
+            }
+
+            .btn-login {
+                background-color: #444;
+                border: none;
+                padding: 10px 20px;
+                color: #fff;
+                cursor: pointer;
+                font-size: 14px;
+                border-radius: 5px;
+            }
+
+                .btn-login:hover {
+                    background-color: #555;
+                }
+
+            .container {
+                max-width: 1200px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #111;
+                border-radius: 10px;
+            }
+
+            .section {
+                margin-bottom: 20px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            th, td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #444;
+            }
+
+            th {
+                background-color: #333;
+            }
+
+            td {
+                background-color: #222;
+            }
+
+            .logout-btn {
+                background-color: #f00;
+                border: none;
+                padding: 10px 20px;
+                color: #fff;
+                cursor: pointer;
+                font-size: 14px;
+                border-radius: 5px;
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+            }
+
+                .logout-btn:hover {
+                    background-color: #d00;
+                }
+        </style>
+    </head>
+    <body>
+        <div id="menu2">
+            <div class="welcome">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span>Xin chào, @ViewBag.AccountInfo?.Username</span>
+                }
+                else
+                {
+                    <button type="submit" class="btn-login">
+                        @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "btn-login", style = "text-decoration:none;" })
+                    </button>
+                }
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Thông Tin Tài Khoản</h2>
+                <p><strong>Tên tài khoản:</strong> @ViewBag.AccountInfo?.Username</p>
+            </div>
+
+            <div class="section">
+                <h2>Lịch Sử Mua Hàng</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã Chi Tiết</th>
+                            <th>Mã Sản Phẩm</th>
+                            <th>Đơn Giá</th>
+                            <th>Mã Đơn Hàng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.OrderDetails != null)
+                        {
+                            foreach (var item in ViewBag.OrderDetails)
+                            {
+                                <tr>
+                                    <td>@item.DetailId</td>
+                                    <td>@item.ProductId</td>
+                                    <td>@item.UnitPrice</td>
+                                    <td>@item.OrderId</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: #aaa;">Không có dữ liệu.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form action="/Account/Logout" method="post">
+                <button class="logout-btn" type="submit">Đăng Xuất</button>
+            </form>
+        }
+    </body>
+</html>
+</h2>
+

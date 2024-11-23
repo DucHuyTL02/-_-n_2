@@ -1,0 +1,32 @@
+﻿
+
+@{
+    ViewBag.Title = "Xacnhandon";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+<h2>Xacnhandon</h2>
+
+@model Web_bán_hàng__đồ_án_.Models.Order
+
+<h2>Xác Nhận Đơn Hàng</h2>
+
+<div>
+    <p>Cảm ơn bạn đã đặt hàng! Đơn hàng của bạn đã được xác nhận.</p>
+    <p><strong>Mã đơn hàng:</strong> #@Model.OrderID</p>
+    <p><strong>Tổng tiền:</strong> @String.Format("{0:0,0} đ", Model.TotalAmount)</p>
+    <p>
+        <strong>Phương thức thanh toán:</strong>
+        @if (Model.PaymentStatus == "bank")
+        {
+            <span>Chuyển khoản ngân hàng</span>
+        }
+        else
+        {
+            <span>Thanh toán khi nhận hàng (COD)</span>
+        }
+    </p>
+    <p><strong>Trạng thái đơn hàng:</strong> @Model.PaymentStatus</p>
+</div>
+
+<a href="@Url.Action("trangchu", "Home")" class="btn btn-primary">Tiếp tục mua sắm</a>

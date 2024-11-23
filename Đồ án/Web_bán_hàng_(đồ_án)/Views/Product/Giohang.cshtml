@@ -69,32 +69,56 @@
 <body>
 
     <div class="cart-container">
-        <h3 class="mb-4">Giỏ Hàng</h3>
-        <div>
-            @foreach (var item in Model)
-            {
-                <div class="cart-item row">
-                    <div class="col-md-2">
-                        <img src="@item.ProductImage" alt="@item.ProductName" class="product-image" />
-                    </div>
-                    <div class="col-md-4">
-                        <h5>@item.ProductName</h5>
+        <h2>Giỏ Hàng</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Hình Ảnh</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Giá</th>
+                    <th>Tổng</th>
+                    <th>Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="@item.ProductImage" alt="@item.ProductName" style="width: 100px;"></td>
+                        <td>@item.ProductName</td>
+                        <td>@item.StockQuantityPro</td>
+                        <td>@String.Format("{0:0,0} đ", item.ProductPrice)</td>
+                        <td>@String.Format("{0:0,0} đ", item.StockQuantityPro * item.ProductPrice)</td>
+                        <td>
+                            <a href="@Url.Action("Remove", "Cart", new { productId = item.ProductID })" class="btn btn-danger">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-                    </div>
-                    <div class="col-md-2">
-                        <p>Đơn Giá: @item.ProductPrice.ToString("N0")đ</p>
-                    </div>
-                    <div class="col-md-2">
-                        <p>Số Lượng: @item.StockQuantityPro</p>
-                    </div>
-                    <div class="col-md-2">
-                        <p class="total">Thành Tiền: @item.ProductPrice.ToString("N0")đ</p>
-                    </div>
-                </div>
-            }
+        <div class="total">
+            <h3>Tổng cộng: @String.Format("{0:0,0} đ", Model.Sum(x => x.StockQuantityPro * x.ProductPrice))</h3>
         </div>
-        <div class="mt-4 text-end">
-            <a href="/Checkout" class="btn btn-primary">Mua Hàng</a>
+
+        <div class="checkout-methods">
+            <h3>Phương Thức Thanh Toán</h3>
+            <form action="@Url.Action("Checkout", "Cart")" method="post">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="PaymentMethod" value="bank" id="paymentBank" checked>
+                    <label class="form-check-label" for="paymentBank">
+                        Chuyển khoản ngân hàng
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="PaymentMethod" value="cod" id="paymentCOD">
+                    <label class="form-check-label" for="paymentCOD">
+                        Thanh toán khi nhận hàng
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Đặt Hàng</button>
+            </form>
         </div>
     </div>
 

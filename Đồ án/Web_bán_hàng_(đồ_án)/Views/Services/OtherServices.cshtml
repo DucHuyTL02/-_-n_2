@@ -225,46 +225,23 @@
             </section>
             @foreach (var item in Model)
             {
-                <!-- Dòng Sản Phẩm Được Lựa Chọn Nhiều -->
                 <section class="products-section">
                     <h2 style="color:snow">Dòng Sản Phẩm Được Lựa Chọn Nhiều</h2>
                     <div class="product-grid">
-                        <!-- Sản phẩm 1 -->
                         <div class="product-item">
                             <img @item.ProductImage alt="Sản phẩm 1" />
                             <h3>@item.ProductName</h3>
                             <p>@item.ProductPrice</p>
                         </div>
                     
-                        <!-- Thêm sản phẩm tương tự -->
-                        <!-- Repeat 16 sản phẩm -->
+                    
                     </div>
                 </section>
 
 
             }
 
-            <!--
-    <section class="products-section">
-        <h2 style="color:snow">Dòng Sản Phẩm Được Lựa Chọn Nhiều</h2>
-        <div class="product-grid">
-            <!-- Sản phẩm 1
-            <div class="product-item">
-                <img src="path/to/watch1.jpg" alt="Sản phẩm 1" />
-                <h3>Đồng Hồ Nam 1</h3>
-                <p>Giá: 2,000,000 VND</p>
-            </div>
-            <!-- Sản phẩm 2
-            <div class="product-item">
-                <img src="path/to/watch2.jpg" alt="Sản phẩm 2" />
-                <h3>Đồng Hồ Nam 2</h3>
-                <p>Giá: 3,500,000 VND</p>
-            </div>
-            <!-- Thêm sản phẩm tương tự
-    <!-- Repeat 16 sản phẩm
-    </div>
-    </section>
-    -->
+
     
            
         </div>

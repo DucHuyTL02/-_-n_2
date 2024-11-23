@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "tragop";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+<div class="modal fade" id="installmentModal" tabindex="-1" aria-labelledby="installmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="installmentModalLabel">Trả Góp Qua Thẻ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Body -->
+            <div class="modal-body">
+                <div class="product-info">
+                    <img src="@ViewBag.Product.ProductImage" alt="@ViewBag.Product.ProductName" class="product-image">
+                    <h2>@ViewBag.Product.ProductName</h2>
+                    <p>Giá: @String.Format("{0:0,0} đ", ViewBag.Product.ProductPrice)</p>
+                </div>
+                <hr>
+                <h3>Các Gói Trả Góp</h3>
+                <div class="row">
+                    @foreach (var option in ViewBag.InstallmentOptions)
+                    {
+                        <div class="col-md-4">
+                            <h5>@option.Period</h5>
+                            <p>Lãi suất: @(option.InterestRate * 100)%</p>
+                            <p>Tổng thanh toán: @String.Format("{0:0,0} đ", option.TotalPayment)</p>
+                            <p>Trả mỗi tháng: @String.Format("{0:0,0} đ", option.MonthlyPayment)</p>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Xác Nhận Thanh Toán</button>
+            </div>
+        </div>
+    </div>
+</div>
+

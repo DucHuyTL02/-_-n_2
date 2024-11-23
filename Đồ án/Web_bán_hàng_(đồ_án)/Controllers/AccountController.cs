@@ -95,6 +95,45 @@ namespace Web_bán_hàng__đồ_án_.Controllers
             return View(model);
         }
 
+
+        public ActionResult Customer()
+        {
+            string currentUser = User.Identity.Name;
+
+            var accountInfo = db.Users
+                .Where(u => u.Username == currentUser)
+                .Select(u => new
+                {
+                    u.Username,
+                   
+                })
+                .FirstOrDefault();
+
+            ViewBag.AccountInfo = accountInfo;
+
+            var orderDetails = db.OrderDetails
+                .Select(o => new
+                {
+                    o.DetailID,
+                    o.ProductID,
+                    o.UnitPrice,
+                    o.OrderID
+                })
+                .ToList();
+
+            ViewBag.OrderDetails = orderDetails;
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account");
+        }
+
+
+
     }
-    
+
 }
