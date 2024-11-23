@@ -28,7 +28,6 @@ namespace Web_bán_hàng__đồ_án_.Controllers
             }
             var product = csdl.Products.Where(p => p.CategoryID == pro.CategoryID && p.ProductID != pro.ProductID).AsQueryable();
             ProductDetailsVM model = new ProductDetailsVM();
-            List<Product> products = csdl.Products.Take(4).ToList();
             return View(model);
         }
         public ActionResult ProductList()
