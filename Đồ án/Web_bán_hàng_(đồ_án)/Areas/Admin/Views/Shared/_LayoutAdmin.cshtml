@@ -50,7 +50,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Admin/Products">
+                            <a class="nav-link" href="~/Admin/Products/Product">
                                 <i class="fas fa-box"></i>
                                 <span>Products</span>
                             </a>
@@ -68,7 +68,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Admin/Users">
+                            <a class="nav-link" href="~/Admin/Users/Index">
                                 <i class="fas fa-users"></i>
                                 <span>Users</span>
                             </a>
@@ -82,6 +82,7 @@
                 <div class="content-header">
                     <h1>@ViewBag.Title</h1>
                     @RenderBody()
+                    @RenderSection("Scripts", required: false)
                 </div>
                 
             </main>

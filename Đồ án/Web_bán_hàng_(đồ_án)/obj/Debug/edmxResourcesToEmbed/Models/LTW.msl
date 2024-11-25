@@ -29,32 +29,34 @@
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
           <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
-          <ScalarProperty Name="AddressDelivery" ColumnName="AddressDelivery" />
-          <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
+          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="DeliveryStatus" ColumnName="DeliveryStatus" />
+          <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="LTWModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetail">
-          <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="LTWModel.Product">
         <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="BrandPro" ColumnName="BrandPro" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
           <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
           <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+          <ScalarProperty Name="BrandPro" ColumnName="BrandPro" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
           <ScalarProperty Name="StockQuantityPro" ColumnName="StockQuantityPro" />
         </MappingFragment>
       </EntityTypeMapping>

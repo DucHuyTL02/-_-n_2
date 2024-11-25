@@ -30,20 +30,22 @@
     <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="PaymentStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="AddressDelivery" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ShippingMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeliveryStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Customer" Relationship="Self.FK__Order__CustomerI__412EB0B6" FromRole="Order" ToRole="Customer" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__44FF419A" FromRole="Order" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
-      <PropertyRef Name="DetailID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="DetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProductID" Type="Int32" Nullable="false" />
     <Property Name="OrderID" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
     <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="29" Scale="2" annotation:StoreGeneratedPattern="Computed" />
     <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__Order__44FF419A" FromRole="OrderDetail" ToRole="Order" />
     <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__Produ__440B1D61" FromRole="OrderDetail" ToRole="Product" />
   </EntityType>
@@ -54,13 +56,13 @@
     <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CategoryID" Type="Int32" Nullable="false" />
     <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ProductDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ProductPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="StockQuantityPro" Type="Int32" Nullable="false" />
+    <Property Name="BrandPro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StockQuantityPro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Pro_Category" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__440B1D61" FromRole="Product" ToRole="OrderDetail" />
-    <Property Name="BrandPro" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>

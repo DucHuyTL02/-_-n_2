@@ -94,7 +94,17 @@ namespace Web_bán_hàng__đồ_án_.Controllers
             }
             return View(model);
         }
+      
+        
+        public ActionResult Logout()
+        {
+            // Xóa toàn bộ Session
+            Session.Clear();
+            Session.Abandon();
 
+            // Chuyển hướng về trang chủ
+            return RedirectToAction("trangchu", "Home");
+        }
     }
     
 }

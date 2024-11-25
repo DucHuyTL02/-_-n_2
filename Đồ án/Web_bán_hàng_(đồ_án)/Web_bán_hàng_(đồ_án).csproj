@@ -53,6 +53,12 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -133,10 +139,16 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -178,9 +190,18 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>LTW.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\Cart.cs" />
+    <Compile Include="Models\ViewModel\CartItem.cs" />
+    <Compile Include="Models\ViewModel\CartService.cs" />
+    <Compile Include="Models\ViewModel\CheckoutVM.cs" />
+    <Compile Include="Models\ViewModel\HomeProductVM.cs" />
     <Compile Include="Models\ViewModel\LoginMV.cs" />
+    <Compile Include="Models\ViewModel\OrderSearchVM.cs" />
     <Compile Include="Models\ViewModel\ProductDetailsVM.cs" />
     <Compile Include="Models\ViewModel\RegisterVM.cs" />
+    <Compile Include="Models\ViewModel\SearchProductVN.cs" />
+    <Compile Include="Models\ViewModel\ShoppingCartModel.cs" />
+    <Compile Include="Models\ViewModel\UserCustomerVM.cs" />
     <Compile Include="Models\Watch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -224,17 +245,22 @@
     <EmbeddedResource Include="Content\Image\register.jpg" />
     <EmbeddedResource Include="Content\Image\sua.jpg" />
     <EmbeddedResource Include="Content\Image\tissort.jpg" />
-    <EmbeddedResource Include="Content\Image\baohanh.png" />
-    <EmbeddedResource Include="Content\Image\dichvukh.jpg" />
-    <EmbeddedResource Include="Content\Image\suadongho.jpg" />
+    <Content Include="Content\Image\empty-cart.png" />
+    <Content Include="Content\Image\recycle-bin-icon-trash-can-260nw-1716184591.jpg" />
+    <Content Include="Content\Image\suadongho.jpg" />
     <Content Include="Content\JS\JSSlideBar.js" />
+    <Content Include="Content\JS\UploadFile.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\StyleAdmin\StyleCategory.css" />
     <Content Include="Content\StyleAdmin\StyleCrudCate.css" />
     <Content Include="Content\StyleAdmin\StyleLayoutAdmin.css" />
+    <Content Include="Content\StyleAdmin\StyleProductSearch.css" />
+    <Content Include="Content\StyleCustomer\StyleDetails.css" />
     <Content Include="Content\StyleCustomer\StyleLayoutHome.css" />
     <Content Include="Content\StyleCustomer\StyleLogin.css" />
     <Content Include="Content\StyleCustomer\StyleRegister.css" />
     <Content Include="Content\StyleCus\SlideBar.css" />
+    <Content Include="Content\StyleCus\StyleHome.css" />
     <Content Include="Content\StyleCus\StyleLayoutCus.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -257,6 +283,33 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Admin\TrangAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Admin.cshtml" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Product.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\PV_Product.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\ProductListVM.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
     <EntityDeploy Include="Models\LTW.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LTW.Designer.cs</LastGenOutput>
@@ -264,16 +317,6 @@
     <Content Include="Models\LTW.edmx.diagram">
       <DependentUpon>LTW.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Admin\TrangAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="ClassDiagram1.cd" />
-    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Category.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -296,14 +339,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutWeb.cshtml" />
     <Content Include="Views\Home\trangchu.cshtml" />
-    <Content Include="Views\Home\MenWatches.cshtml" />
-    <Content Include="Views\Home\WomenWatches.cshtml" />
-    <Content Include="Views\Home\CoupleWatches.cshtml" />
     <Content Include="Views\Home\Banner.cshtml" />
     <Content Include="Views\Watches\LichSu.cshtml" />
     <Content Include="Views\Services\Warranty.cshtml" />
@@ -322,7 +359,16 @@
     <Content Include="Views\Watches\hai.cshtml" />
     <Content Include="Views\Watches\mot.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
-    <Content Include="Views\Product\All.cshtml" />
+    <Content Include="Views\Product\Category.cshtml" />
+    <Content Include="Views\Home\FeaturedProductsVM.cshtml" />
+    <Content Include="Views\Home\NewProductPV.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Home\FilterWatches.cshtml" />
+    <Content Include="Views\Order\Checkout.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
+    <Content Include="Views\Home\ProductDetails.cshtml" />
+    <Content Include="Views\Order\OrderSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

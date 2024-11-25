@@ -27,18 +27,20 @@
     <Property Name="OrderDate" Type="date" Nullable="false" />
     <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="PaymentStatus" Type="nvarchar(max)" />
-    <Property Name="AddressDelivery" Type="nvarchar(max)" />
-    <Property Name="ShippingMethod" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentMethod" Type="nvarchar(max)" />
+    <Property Name="DeliveryStatus" Type="nvarchar(max)" />
+    <Property Name="ShippingAddress" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
-      <PropertyRef Name="DetailID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="DetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="OrderID" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalPrice" Type="decimal" Precision="29" Scale="2" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -47,11 +49,11 @@
     <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CategoryID" Type="int" Nullable="false" />
     <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ProductDescription" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ProductPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="ProductImage" Type="nvarchar(max)" />
-    <Property Name="StockQuantityPro" Type="int" Nullable="false" />
-    <Property Name="BrandPro" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="BrandPro" Type="nvarchar(max)" />
+    <Property Name="ProductDescription" Type="nvarchar(max)" />
+    <Property Name="StockQuantityPro" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

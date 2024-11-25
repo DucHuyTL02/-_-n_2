@@ -15,7 +15,7 @@ namespace Web_bán_hàng__đồ_án_.Areas.Admin.Controllers
         private LTWEntities db = new LTWEntities();
 
         // GET: Admin/Categories
-        public ActionResult Category()
+        public ActionResult Index()
         {
             return View(db.Categories.ToList());
         }

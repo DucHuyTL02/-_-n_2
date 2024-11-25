@@ -1,26 +1,28 @@
-﻿html, body {
-    height: 100%;
-    margin: 0;
+﻿body {
+    position: relative;
+    background: url('../image/register.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #TrangRegister {
-    background: url('../Image/register.jpg') no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    min-height: 100vh;
-    width: 100%;
+
 }
 
 #Register {
+    position: relative;
+    z-index: 1;
     padding: 10px 20px 20px 10px;
     width: 500px;
     border-radius: 15px;
     padding: 50px 40px;
-    background-color: transparent;
     border: 2px solid white;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(2px);
+    background-color: transparent;
 }
 
     #Register h1 {
@@ -122,4 +124,9 @@
 #Register input {
     border: none;
     outline: none;
+}
+.back{
+    text-align:center;
+    text-decoration:none;
+    color:black;
 }
